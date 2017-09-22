@@ -18,7 +18,7 @@ class MongoDatabase(DependencyProvider):
 
         self.client = MongoClient(conn_uri)
 
-        self.database = self.client[self.container.service_name]
+        self.database = self.client[self.container.config.get('MONGODB_DATABASE',self.container.service_name)]
 
         if 'MONGODB_USER' in self.container.config and self.container.config['MONGODB_USER'] != "":
             self.database.authenticate(self.container.config['MONGODB_USER'],
